@@ -6,7 +6,7 @@ import { ProjectCard, type Project } from "@/components/ProjectCard";
 import { supabase } from "@/integrations/supabase/client";
 import projectsData from "@/data/projects.json";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/projects")({
   component: Index,
   head: () => ({
     meta: [
