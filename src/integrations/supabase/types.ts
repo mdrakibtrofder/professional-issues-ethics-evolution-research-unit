@@ -14,13 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      project_like_voters: {
+        Row: {
+          created_at: string
+          project_id: string
+          voter_id: string
+        }
+        Insert: {
+          created_at?: string
+          project_id: string
+          voter_id: string
+        }
+        Update: {
+          created_at?: string
+          project_id?: string
+          voter_id?: string
+        }
+        Relationships: []
+      }
+      project_likes: {
+        Row: {
+          count: number
+          project_id: string
+          updated_at: string
+        }
+        Insert: {
+          count?: number
+          project_id: string
+          updated_at?: string
+        }
+        Update: {
+          count?: number
+          project_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      toggle_project_like: {
+        Args: { p_project_id: string; p_voter_id: string }
+        Returns: {
+          count: number
+          liked: boolean
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
