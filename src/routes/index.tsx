@@ -1,4 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { ProjectCard, type Project } from "@/components/ProjectCard";
+import { supabase } from "@/integrations/supabase/client";
+import { Toaster } from "@/components/ui/sonner";
+import projectsData from "@/data/projects.json";
 import {
   Sparkles,
   MapPin,
@@ -79,8 +84,29 @@ const focusAreas = [
 ];
 
 function Home() {
+  const allProjects = projectsData as Project[];
+  const featured = allProjects.slice(0, 6);
+  const [counts, setCounts] = useState<Record<string, number>>({});
+
+  useEffect(() => {
+    let mounted = true;
+    supabase
+      .from("project_likes")
+      .select("project_id, count")
+      .then(({ data, error }) => {
+        if (!mounted || error || !data) return;
+        const map: Record<string, number> = {};
+        for (const r of data) map[r.project_id] = r.count;
+        setCounts(map);
+      });
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Toaster richColors position="top-center" />
       {/* Nav */}
       <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
@@ -301,20 +327,33 @@ function Home() {
 
       {/* CTA */}
       <section className="border-t border-border bg-gradient-to-b from-background to-secondary/30">
-        <div className="mx-auto max-w-4xl px-6 py-20 text-center">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            See ethics in action — through student projects.
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-            Browse projects from students across BAUST exploring real-world problems with
-            prompt-driven web design.
-          </p>
-          <Link
-            to="/projects"
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90"
-          >
-            Visit the Project Gallery <ArrowRight className="h-4 w-4" />
-          </Link>
+        <div className="mx-auto max-w-7xl px-6 py-20">
+          <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
+            <div className="max-w-2xl">
+              <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                <Sparkles className="h-3 w-3" /> Student Showcase
+              </div>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+                Individual students&rsquo; intellectual property.
+              </h2>
+              <p className="mt-3 text-muted-foreground">
+                Each project below is the original work and intellectual property of the individual
+                student credited. Explore a sample of their prompt-driven web design work.
+              </p>
+            </div>
+            <Link
+              to="/projects"
+              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90"
+            >
+              View all {allProjects.length} projects <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {featured.map((p) => (
+              <ProjectCard key={p.id} project={p} initialCount={counts[p.id] ?? 0} />
+            ))}
+          </div>
         </div>
       </section>
 
