@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { ProjectCard, type Project } from "@/components/ProjectCard";
 import { supabase } from "@/integrations/supabase/client";
 import projectsData from "@/data/projects.json";
+import { SiteNav } from "@/components/SiteNav";
 
 export const Route = createFileRoute("/projects")({
   component: Index,
@@ -54,14 +55,18 @@ function Index() {
   return (
     <div className="min-h-screen bg-background">
       <Toaster richColors position="top-center" />
+      <SiteNav />
 
-      <header className="border-b border-border bg-gradient-to-b from-secondary/40 to-background">
+      <header className="border-b border-border bg-[image:var(--gradient-soft)]">
         <div className="mx-auto max-w-7xl px-6 py-12 sm:py-16">
-          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur">
+          <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-background/70 px-3 py-1 text-xs font-medium text-primary backdrop-blur">
             <Sparkles className="h-3 w-3" /> Prompt-Driven Web Design Showcase
           </div>
           <h1 className="mt-4 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-            Student Project Gallery
+            Student{" "}
+            <span className="bg-[image:var(--gradient-brand)] bg-clip-text text-transparent">
+              Project Gallery
+            </span>
           </h1>
           <p className="mt-3 max-w-2xl text-base text-muted-foreground sm:text-lg">
             Browse {projects.length} projects built by students. Open a preview, explore the live
