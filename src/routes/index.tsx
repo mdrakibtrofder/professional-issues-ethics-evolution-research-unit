@@ -369,8 +369,97 @@ function Home() {
         </div>
       </section>
 
+      {/* Research Highlights */}
+      <section id="research" className="border-t border-border bg-secondary/20">
+        <div className="mx-auto max-w-6xl px-6 py-20">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div className="max-w-2xl">
+              <div className="inline-flex items-center gap-2 rounded-full bg-accent/30 px-3 py-1 text-xs font-medium text-accent-foreground">
+                <Newspaper className="h-3 w-3" /> Research Highlights
+              </div>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+                Recent work &amp; ongoing inquiries.
+              </h2>
+              <p className="mt-3 text-muted-foreground">
+                A rolling glimpse at the questions, papers, and field activities currently moving through the unit.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            {highlights.map((h) => (
+              <article
+                key={h.title}
+                className="group relative overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
+              >
+                <div className="absolute inset-x-0 top-0 h-1 bg-[image:var(--gradient-brand)] opacity-70" />
+                <div className="flex items-center justify-between text-xs">
+                  <span className="rounded-full bg-primary/10 px-2.5 py-0.5 font-semibold text-primary">
+                    {h.tag}
+                  </span>
+                  <span className="text-muted-foreground">{h.date}</span>
+                </div>
+                <h3 className="mt-4 text-lg font-semibold text-foreground">{h.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{h.desc}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            {voices.map((v) => (
+              <figure
+                key={v.name + v.role}
+                className="rounded-2xl border border-border bg-card p-6 shadow-sm"
+              >
+                <Quote className="h-5 w-5 text-[color:var(--brand-green)]" />
+                <blockquote className="mt-3 text-sm leading-relaxed text-foreground">
+                  &ldquo;{v.quote}&rdquo;
+                </blockquote>
+                <figcaption className="mt-4 text-xs text-muted-foreground">
+                  <span className="font-semibold text-foreground">{v.name}</span> · {v.role}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="border-t border-border">
+        <div className="mx-auto max-w-4xl px-6 py-20">
+          <div className="text-center">
+            <div className="inline-flex items-center gap-2 rounded-full bg-accent/30 px-3 py-1 text-xs font-medium text-accent-foreground">
+              <HelpCircle className="h-3 w-3" /> Frequently Asked
+            </div>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+              Questions, answered.
+            </h2>
+            <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
+              A few things people ask before getting involved with the unit.
+            </p>
+          </div>
+
+          <div className="mt-10 space-y-3">
+            {faqs.map((f) => (
+              <details
+                key={f.q}
+                className="group rounded-2xl border border-border bg-card p-5 shadow-sm transition open:border-primary/40 open:shadow-md"
+              >
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold text-foreground">
+                  <span>{f.q}</span>
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
-      <section className="border-t border-border bg-gradient-to-b from-background to-secondary/30">
+      <section className="border-t border-border bg-[image:var(--gradient-soft)]">
         <div className="mx-auto max-w-7xl px-6 py-20">
           <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
             <div className="max-w-2xl">
