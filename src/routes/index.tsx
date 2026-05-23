@@ -4,6 +4,7 @@ import { ProjectCard, type Project } from "@/components/ProjectCard";
 import { supabase } from "@/integrations/supabase/client";
 import { Toaster } from "@/components/ui/sonner";
 import projectsData from "@/data/projects.json";
+import { SiteNav } from "@/components/SiteNav";
 import {
   Sparkles,
   MapPin,
@@ -17,6 +18,9 @@ import {
   ShieldCheck,
   Lightbulb,
   Building2,
+  Newspaper,
+  HelpCircle,
+  Quote,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -83,6 +87,67 @@ const focusAreas = [
   "Sustainability",
 ];
 
+const highlights = [
+  {
+    tag: "Research",
+    date: "2026",
+    title: "Ethical guardrails for student-built AI tools",
+    desc: "A working paper synthesizing classroom experiments on bias, consent, and transparency in prompt-driven applications.",
+  },
+  {
+    tag: "Workshop",
+    date: "Spring",
+    title: "Responsible Prompting Bootcamp",
+    desc: "A two-day hands-on workshop helping students reason about data sources, attribution, and misuse before they ship.",
+  },
+  {
+    tag: "Policy",
+    date: "Brief",
+    title: "Data privacy in north-Bangladesh institutions",
+    desc: "A field-driven policy brief mapping current practice, gaps, and pragmatic next steps for local universities.",
+  },
+];
+
+const faqs = [
+  {
+    q: "Who can join PIEERU?",
+    a: "Any BAUST student, faculty member, or visiting researcher with a serious interest in the ethical dimensions of technology, business, or public life. We welcome contributors from engineering, computing, business, and the humanities.",
+  },
+  {
+    q: "What kinds of projects do you support?",
+    a: "Empirical studies, controlled experiments, surveys, policy briefs, classroom interventions, and applied design work. If the question is at the intersection of professional practice and ethics, it likely fits.",
+  },
+  {
+    q: "Do students own their work?",
+    a: "Yes. Every project showcased here is the original intellectual property of the individual student credited. PIEERU provides mentorship, infrastructure, and a platform — not authorship.",
+  },
+  {
+    q: "How can external organizations collaborate?",
+    a: "We partner with industry, government, NGOs, and other universities on funded research, advisory engagements, and training. Reach out via the contact section below.",
+  },
+];
+
+const voices = [
+  {
+    quote:
+      "PIEERU pushed me to ask why before how. My project became more thoughtful, and honestly, more useful.",
+    name: "Student Researcher",
+    role: "CSE, BAUST",
+  },
+  {
+    quote:
+      "Pairing engineering rigor with ethical reasoning is exactly what the next decade of professionals needs.",
+    name: "Faculty Advisor",
+    role: "BAUST",
+  },
+  {
+    quote:
+      "A young unit with a clear voice — work that takes both technology and people seriously.",
+    name: "Collaborator",
+    role: "Industry partner",
+  },
+];
+
 function Home() {
   const allProjects = projectsData as Project[];
   const featured = allProjects.slice(0, 6);
@@ -107,34 +172,13 @@ function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Toaster richColors position="top-center" />
-      {/* Nav */}
-      <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <Link to="/" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/60 text-primary-foreground">
-              <Sparkles className="h-4 w-4" />
-            </div>
-            <span className="text-sm font-semibold tracking-tight">PIEERU</span>
-          </Link>
-          <nav className="flex items-center gap-1 text-sm">
-            <a href="#about" className="rounded-md px-3 py-1.5 text-muted-foreground hover:text-foreground">About</a>
-            <a href="#capabilities" className="rounded-md px-3 py-1.5 text-muted-foreground hover:text-foreground">Capabilities</a>
-            <a href="#focus" className="rounded-md px-3 py-1.5 text-muted-foreground hover:text-foreground">Focus</a>
-            <a href="#contact" className="rounded-md px-3 py-1.5 text-muted-foreground hover:text-foreground">Contact</a>
-            <Link
-              to="/projects"
-              className="ml-2 inline-flex items-center gap-1 rounded-full bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground hover:bg-primary/90"
-            >
-              Projects <ArrowRight className="h-3 w-3" />
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <SiteNav />
 
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-secondary/40 via-background to-background" />
-        <div className="absolute -top-32 left-1/2 -z-10 h-[480px] w-[900px] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute inset-0 -z-10 bg-[image:var(--gradient-soft)] opacity-70" />
+        <div className="absolute -top-32 left-1/4 -z-10 h-[420px] w-[680px] rounded-full bg-[color:var(--brand-blue)]/20 blur-3xl" />
+        <div className="absolute -top-10 right-0 -z-10 h-[360px] w-[520px] rounded-full bg-[color:var(--brand-green)]/25 blur-3xl" />
 
         <div className="mx-auto max-w-6xl px-6 pt-20 pb-24 sm:pt-28 sm:pb-32">
           <div className="inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur">
@@ -143,7 +187,7 @@ function Home() {
 
           <h1 className="mt-6 max-w-4xl text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
             Shaping the future of{" "}
-            <span className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+            <span className="bg-[image:var(--gradient-brand)] bg-clip-text text-transparent">
               professional ethics
             </span>{" "}
             in a technological era.
@@ -159,13 +203,13 @@ function Home() {
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               to="/projects"
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90"
+              className="inline-flex items-center gap-2 rounded-full bg-[image:var(--gradient-brand)] px-5 py-2.5 text-sm font-semibold text-white shadow-md transition hover:opacity-90"
             >
               Explore Student Projects <ArrowRight className="h-4 w-4" />
             </Link>
             <a
               href="#about"
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-5 py-2.5 text-sm font-semibold text-foreground transition hover:bg-secondary"
+              className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-background px-5 py-2.5 text-sm font-semibold text-foreground transition hover:border-primary hover:text-primary"
             >
               Learn About PIEERU
             </a>
