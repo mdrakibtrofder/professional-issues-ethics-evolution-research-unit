@@ -476,7 +476,7 @@ function Home() {
             </div>
             <Link
               to="/projects"
-              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90"
+              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-[image:var(--gradient-brand)] px-5 py-2.5 text-sm font-semibold text-white shadow-md transition hover:opacity-90"
             >
               View all {allProjects.length} projects <ArrowRight className="h-4 w-4" />
             </Link>
