@@ -1,0 +1,4 @@
+const tsrStartManifest = () => ({ routes: { __root__: { filePath: "/Users/mdrakibtrofder/Github/professional-issues-ethics-evolution-research-unit/src/routes/__root.tsx", children: ["/", "/projects"], assets: void 0, preloads: ["/assets/index-B9x-aoNr.js"] }, "/": { filePath: "/Users/mdrakibtrofder/Github/professional-issues-ethics-evolution-research-unit/src/routes/index.tsx", children: void 0, assets: void 0, preloads: ["/assets/index-C92frgMy.js", "/assets/SiteNav-BdgquyQi.js"] }, "/projects": { filePath: "/Users/mdrakibtrofder/Github/professional-issues-ethics-evolution-research-unit/src/routes/projects.tsx", children: void 0, assets: void 0, preloads: ["/assets/projects-ByH8OT5b.js", "/assets/SiteNav-BdgquyQi.js"] } }, clientEntry: "/assets/index-B9x-aoNr.js" });
+export {
+  tsrStartManifest
+};
